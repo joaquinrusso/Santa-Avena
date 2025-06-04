@@ -260,6 +260,7 @@
       letter-spacing: .03em;
       transition: opacity .3s;
     }
+    /* --- Comentarios más compactos --- */
     .testimonials-section {
       padding: 18px 3vw !important;
       margin: 32px 0 !important;
@@ -452,11 +453,14 @@
     <section class="testimonials-section">
       <h2>Lo que dicen nuestros clientes</h2>
       <ul id="user-comentarios-list"></ul>
+      <!-- Formulario de comentarios debajo de los comentarios existentes -->
       <form class="comentarios-form" id="form-comentario" autocomplete="off">
         <input type="text" id="nombre-comentario" placeholder="Nombre y apellido" maxlength="40" required>
         <select id="producto-comentario" required>
           <option value="">Seleccioná el producto</option>
+          <!-- Opciones llenadas con JS -->
         </select>
+        <!-- Estrellas: más visible, más grandes y arriba del textarea -->
         <label style="font-weight:bold; margin-bottom:2px; margin-top:2px; color:#5B854B; font-size:1em;">
           Elegí tu calificación:
           <div class="estrellas-selector" id="estrellas-selector" aria-label="Selecciona cuántas estrellas" style="font-size:1.3em; margin:2px 0 0 0;">
@@ -485,8 +489,156 @@
           </a>
         </p>
       </aside>
-      <!-- ... resto de la tienda ... -->
-      <!-- No se replica toda la tienda aquí por longitud, pero debe ir tu código original -->
+...
+      <div class="container">
+        ...
+        ...
+        <section class="seccion-tienda" id="seccion-snacks">
+          <h2>Snacks</h2>
+          <div class="productos-grid">
+            <div class="producto-card" data-nombre="Budín Orgánico de Avena" data-precio="6500">
+              <img src="imagenes/budin.jpg" alt="Budín Orgánico de Avena" />
+              <div class="producto-info">
+                <h3>Budín Orgánico de Avena</h3>
+                <p>
+                  <strong>INGREDIENTES:</strong><br>
+                  Avena, coco, nueces, cacao, huevo, esencia de vainilla, chips de chocolate semi-amargo.
+                </p>
+                <div class="producto-precio">$6500</div>
+                <div class="producto-controls">
+                  <input type="number" min="1" max="20" value="1" />
+                  <button class="add-carrito">Agregar</button>
+                </div>
+                <div class="valores-titulo" style="margin-top:9px;">VALORES NUTRICIONALES</div>
+                <div class="valores-lista" style="font-size:0.98em;">
+                  63 g proteína<br>
+                  260 g carbohidratos<br>
+                  36 g fibra
+                </div>
+              </div>
+            </div>
+            <div class="producto-card" data-nombre="Galletas de Avena (chocolate)" data-precio="1000">
+              <img src="imagenes/galletaavena.jpg" alt="Galletas de Avena (chocolate)" />
+              <div class="producto-info">
+                <h3>Galletas de Avena (chocolate)</h3>
+                <p>
+                  <strong>INGREDIENTES:</strong><br>
+                  avena, cacao amargo, azucar mascabo, coco rallado, chips de chocolate semi-amargo.
+                </p>
+                <div class="producto-precio">$1000</div>
+                <div class="producto-controls">
+                  <input type="number" min="1" max="20" value="1" />
+                  <button class="add-carrito">Agregar</button>
+                </div>
+                <div class="valores-titulo" style="margin-top:9px;">VALORES NUTRICIONALES</div>
+                <div class="valores-lista" style="font-size:0.98em;">
+                  6 g proteína<br>
+                  2 g fibra<br>
+                  150 kcal
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- Nueva sección de Promociones -->
+        <section class="seccion-tienda" id="seccion-promos">
+          <h2>Promociones</h2>
+          <div class="productos-grid">
+            <div class="producto-card" data-nombre="Promo: 6 Galletas de Avena (chocolate)" data-precio="4200">
+              <img src="imagenes/galletaavena.jpg" alt="Promo: 6 Galletas de Avena (chocolate)" />
+              <div class="producto-info">
+                <h3>Promo: 6 Galletas de Avena (chocolate)</h3>
+                <div class="producto-precio">$4200</div>
+                <div class="producto-controls">
+                  <input type="number" min="1" max="10" value="1" />
+                  <button class="add-carrito">Agregar</button>
+                </div>
+              </div>
+            </div>
+            <div class="producto-card" data-nombre="Promo: 12 Galletas de Avena (chocolate)" data-precio="8000">
+              <img src="imagenes/galletaavena.jpg" alt="Promo: 12 Galletas de Avena (chocolate)" />
+              <div class="producto-info">
+                <h3>Promo: 12 Galletas de Avena (chocolate)</h3>
+                <div class="producto-precio">$8000</div>
+                <div class="producto-controls">
+                  <input type="number" min="1" max="10" value="1" />
+                  <button class="add-carrito">Agregar</button>
+                </div>
+              </div>
+            </div>
+            <div class="producto-card" data-nombre="Promo: 1 Budín + 6 Galletas" data-precio="9000">
+              <img src="imagenes/budin.jpg" alt="Promo: 1 Budín + 6 Galletas (chocolate)" />
+              <div class="producto-info">
+                <h3>Promo: 1 Budín + 6 Galletas (chocolate)</h3>
+                <div class="producto-precio">$9000</div>
+                <div class="producto-controls">
+                  <input type="number" min="1" max="10" value="1" />
+                  <button class="add-carrito">Agregar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+...
+...
+        ...
+        <section class="seccion-tienda" id="seccion-productos">
+          <h2>Productos</h2>
+          <div class="productos-grid">
+            <div class="producto-card" data-nombre="Avena Instantánea 500g" data-precio="3500">
+              <img src="imagenes/avenas.png" alt="Avena Instantánea" />
+              <div class="producto-info">
+                <h3>Avena Instantánea 500g</h3>
+                <div class="producto-precio">$3500</div>
+                <div class="producto-controls">
+                  <input type="number" min="1" max="20" value="1" />
+                  <button class="add-carrito">Agregar</button>
+                </div>
+              </div>
+            </div>
+            <div class="producto-card" data-nombre="Cacao Amargo en Polvo 100g" data-precio="2700">
+              <img src="imagenes/cacaoo.png" alt="cacaoo.png" />
+              <div class="producto-info">
+                <h3>Cacao Amargo en Polvo 100g</h3>
+                <div class="producto-precio">$2700</div>
+                <div class="producto-controls">
+                  <input type="number" min="1" max="20" value="1" />
+                  <button class="add-carrito">Agregar</button>
+                </div>
+              </div>
+            </div>
+            <div class="producto-card" data-nombre="Coco Rallado 100g" data-precio="2300">
+              <img src="imagenes/coco.png" alt="Coco.png" />
+              <div class="producto-info">
+                <h3>Coco Rallado 100g</h3>
+                <div class="producto-precio">$2300</div>
+                <div class="producto-controls">
+                  <input type="number" min="1" max="20" value="1" />
+                  <button class="add-carrito">Agregar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+...
+        <section id="pedido" style="display:block;">
+          <h2>Tu Pedido</h2>
+          <div id="carrito-box">
+            <ul id="carrito-list"></ul>
+            <div id="carrito-total"></div>
+          </div>
+          <div class="pago-info"><strong>Método de Pago:</strong> Solo aceptamos <strong>Mercado Pago</strong>.</div>
+          <form id="pedido-form">
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" required />
+            <label for="apellido">Apellido:</label>
+            <input type="text" id="apellido" name="apellido" required />
+            <label for="telefono">Teléfono:</label>
+            <input type="tel" id="telefono" name="telefono" required />
+            <button type="submit">Enviar Pedido</button>
+          </form>
+        </section>
+      </div>
     </div>
   </div>
   <div id="mensaje-carrito"></div>
@@ -508,36 +660,95 @@
     const showTiendaBtn = document.getElementById('show-tienda');
     showInformativaBtn.onclick = () => showScreen('landing');
     showTiendaBtn.onclick = showTienda;
-    showScreen('landing');
-    // ... El resto de tu script para carrito, productos, etc. ...
-  </script>
-  <script>
-    // Comentarios conectados a Google Sheets
-    const API_URL = "https://script.google.com/macros/s/AKfycby_m6X30NqqsRijkRQL293MnPEzMh1-y_Qm3fiovbJpHkfAcDPvbseJmoumiE3Y-rY/exec"; // <--- Pega aquí tu URL de Apps Script
 
-    // Manejo de estrellas visuales
-    let estrellasSeleccionadas = 0;
-    const estrellas = document.querySelectorAll('#estrellas-selector .estrella');
-    const estrellasTexto = document.getElementById('estrellas-texto');
-    estrellas.forEach((estrella, idx) => {
-      estrella.addEventListener('click', () => setEstrellas(idx + 1));
-      estrella.addEventListener('keydown', e => {
-        if (e.key === "Enter" || e.key === " ") setEstrellas(idx + 1);
-      });
-    });
-    function setEstrellas(valor) {
-      estrellasSeleccionadas = valor;
-      estrellas.forEach((e, i) => {
-        e.classList.toggle('seleccionada', i < valor);
-      });
-      estrellasTexto.textContent = valor > 0 ? `${valor} estrella${valor > 1 ? "s" : ""}` : '';
+    // Mensaje carrito
+    function mostrarMensajeCarrito(texto) {
+      const mensaje = document.getElementById('mensaje-carrito');
+      mensaje.textContent = texto;
+      mensaje.style.display = 'block';
+      mensaje.style.opacity = '1';
+      mensaje.style.animation = 'none';
+      void mensaje.offsetWidth;
+      mensaje.style.animation = '';
+      mensaje.style.animation = 'fadeInOut 2s';
+      setTimeout(() => {
+        mensaje.style.opacity = '0';
+        setTimeout(() => mensaje.style.display = 'none', 500);
+      }, 1800);
     }
+    // Carrito
+    let carrito = [];
+    function renderCarrito(){
+      const list = document.getElementById('carrito-list');
+      const totalDiv = document.getElementById('carrito-total');
+      list.innerHTML = '';
+      let total = 0;
+      carrito.forEach((item, idx)=>{
+        total += item.precio * item.cantidad;
+        const li = document.createElement('li');
+        li.style.animation = 'fadeInUp .25s';
+        li.innerHTML = `<span>${item.nombre} x${item.cantidad} — $${item.precio * item.cantidad}</span>
+        <button onclick="quitarDelCarrito(${idx})" aria-label="Quitar ${item.nombre} del carrito">Quitar</button>`;
+        list.appendChild(li);
+      });
+      totalDiv.textContent = "Total: $" + total;
+      if(carrito.length===0) list.innerHTML = '<li style="border:none;">Tu carrito está vacío.</li>';
+    }
+    window.quitarDelCarrito = idx => {
+      carrito.splice(idx,1); renderCarrito();
+    };
+    document.querySelectorAll('.add-carrito').forEach(btn=>{
+      btn.onclick = function(e){
+        e.stopPropagation();
+        const card = btn.closest('.producto-card');
+        const nombre = card.dataset.nombre;
+        const precio = parseInt(card.dataset.precio,10);
+        const cantidad = parseInt(card.querySelector('input[type="number"]').value,10);
+        let existente = carrito.findIndex(p=>p.nombre===nombre);
+        if(existente>-1) carrito[existente].cantidad += cantidad;
+        else carrito.push({nombre, precio, cantidad});
+        renderCarrito();
+        mostrarMensajeCarrito(`¡${cantidad} "${nombre}" añadido${cantidad>1?"s":""} al carrito!`);
+      };
+    });
 
-    // Llenar select de productos desde los snacks de la tienda
+    document.getElementById('pedido-form').onsubmit = function(e){
+      e.preventDefault();
+      if(carrito.length===0) { alert('Agregá productos al carrito antes de pedir.'); return; }
+
+      // Tomar datos del cliente
+      const nombre = document.getElementById('nombre').value.trim();
+      const apellido = document.getElementById('apellido').value.trim();
+      const telefono = document.getElementById('telefono').value.trim();
+
+      // Calcular total y armar detalle del pedido
+      let total = 0;
+      let detalle = carrito.map(item => {
+        total += item.precio * item.cantidad;
+        return `${item.nombre} x${item.cantidad}`;
+      }).join(', ');
+
+      // Mensaje para WhatsApp
+      const mensaje = `¡Hola! Quiero hacer un pedido:%0A%0A` +
+        `Nombre: ${nombre}%0AApellido: ${apellido}%0A` +
+        `Pedido: ${detalle}%0A` +
+        `Total: $${total}`;
+
+      // Tu número de WhatsApp (con código de país, sin + ni espacios)
+      const numero = '5491156413883';
+
+      // Redirigir a WhatsApp
+      window.open(`https://wa.me/${numero}?text=${mensaje}`, '_blank');
+
+      // Limpiar carrito y formulario
+      carrito=[]; renderCarrito(); this.reset();
+    };
+
+    // Reseñas con estrellas, nombre obligatorio, comentario opcional, selector de producto obligatorio
     function actualizarProductosSnacks() {
+      // Busca productos en la sección snacks y llena el selector del formulario de reseñas
       const snacks = document.querySelectorAll('#seccion-snacks .producto-card[data-nombre]');
       const select = document.getElementById('producto-comentario');
-      if (!select) return;
       select.innerHTML = '<option value="">Seleccioná el producto</option>';
       snacks.forEach(card=>{
         const nombre = card.dataset.nombre;
@@ -547,60 +758,112 @@
         select.appendChild(opt);
       });
     }
+    // Llenar productos al cargar página y al volver de la tienda (por si se agregan nuevos productos)
     document.addEventListener('DOMContentLoaded', actualizarProductosSnacks);
     showInformativaBtn.addEventListener('click', actualizarProductosSnacks);
     showTiendaBtn.addEventListener('click', actualizarProductosSnacks);
 
-    // Enviar comentario a Google Sheets
-    document.getElementById('form-comentario').addEventListener('submit', function(e) {
+    // ------ COMENTARIOS CON GOOGLE SHEETS ------
+    // Cambia esta variable por la URL de tu API de Google Apps Script
+    const SHEET_API_URL = "https://script.google.com/macros/s/AKfycby_m6X30NqqsRijkRQL293MnPEzMh1-y_Qm3fiovbJpHkfAcDPvbseJmoumiE3Y-rY/exec";
+
+    // Leer y renderizar comentarios desde Google Sheets
+    async function renderUserComentarios() {
+      const lista = document.getElementById('user-comentarios-list');
+      lista.innerHTML = 'Cargando comentarios...';
+      try {
+        const res = await fetch(SHEET_API_URL);
+        const comentarios = await res.json();
+        if(comentarios.length === 0) {
+          lista.innerHTML = '<li>¡Sé el primero en dejar tu reseña o tus estrellas!</li>';
+          return;
+        }
+        lista.innerHTML = '';
+        comentarios.slice().reverse().forEach(com => {
+          const li = document.createElement('li');
+          let nombreHtml = com.nombre ? `<div class="comentario-nombre">${com.nombre}</div>` : '';
+          let filaSuperior = `<div class="comentario-fila-superior">`;
+          let productoHtml = com.producto ? `<span class="comentario-producto">${com.producto}</span>` : '';
+          let estrellitas = '';
+          if(com.estrellas) {
+            estrellitas = `<span class="estrellitas-mostradas">${
+              '★'.repeat(Number(com.estrellas))
+            }<span style="color:#d1d1d1">${'★'.repeat(5-Number(com.estrellas))}</span></span>`;
+          }
+          filaSuperior += productoHtml + estrellitas + `</div>`;
+          let textoHtml = com.texto ? `<div>${com.texto}</div>` : '';
+          li.innerHTML = nombreHtml + filaSuperior + textoHtml;
+          lista.appendChild(li);
+        });
+      } catch (err) {
+        lista.innerHTML = '<li>No se pudieron cargar los comentarios.</li>';
+      }
+    }
+
+    // Guardar comentario en Google Sheets
+    document.getElementById('form-comentario').onsubmit = async function(e) {
       e.preventDefault();
       const nombre = document.getElementById('nombre-comentario').value.trim();
       const producto = document.getElementById('producto-comentario').value;
-      const comentario = document.getElementById('texto-comentario').value.trim();
+      const texto = document.getElementById('texto-comentario').value.trim();
       const estrellas = estrellasSeleccionadas;
 
-      if (!nombre || !producto || estrellas < 1) {
-        alert("Por favor completá nombre, producto y calificación.");
+      if(!nombre) {
+        alert('Por favor, ingresá tu nombre y apellido.');
+        return;
+      }
+      if(!producto) {
+        alert('Por favor, seleccioná el producto que estás reseñando.');
+        return;
+      }
+      if(!estrellas && !texto) {
+        alert('Por favor, dejá al menos un comentario o una calificación con estrellas.');
         return;
       }
 
-      fetch(API_URL, {
-        method: 'POST',
-        body: JSON.stringify({nombre, producto, estrellas, comentario}),
-        headers: {'Content-Type': 'application/json'}
-      }).then(() => {
-        document.getElementById('form-comentario').reset();
-        setEstrellas(0);
-        cargarComentarios();
+      try {
+        await fetch(SHEET_API_URL, {
+          method: 'POST',
+          body: JSON.stringify({nombre, producto, texto, estrellas}),
+          headers: {'Content-Type': 'application/json'}
+        });
+        this.reset();
+        marcarEstrellas(0);
+        renderUserComentarios();
+      } catch (err) {
+        alert("No se pudo guardar tu comentario. Intenta de nuevo.");
+      }
+    };
+
+    // ------ FIN GOOGLE SHEETS COMENTARIOS ------
+
+    // Selector de estrellas
+    let estrellasSeleccionadas = 0;
+    const estrellasDom = Array.from(document.querySelectorAll('.estrella'));
+    const estrellasTexto = document.getElementById('estrellas-texto');
+    function marcarEstrellas(n) {
+      estrellasSeleccionadas = n;
+      estrellasDom.forEach((e,i)=>{
+        if(i<n) e.classList.add('seleccionada');
+        else e.classList.remove('seleccionada');
+      });
+      estrellasTexto.textContent = n ? `${n} estrella${n>1?'s':''}` : '';
+    }
+    estrellasDom.forEach(e=>{
+      e.addEventListener('click',()=>marcarEstrellas(Number(e.dataset.valor)));
+      e.addEventListener('keydown',ev=>{
+        if(ev.key==='Enter'||ev.key===' ') {
+          ev.preventDefault();
+          marcarEstrellas(Number(e.dataset.valor));
+        }
       });
     });
 
-    // Mostrar comentarios desde Google Sheets
-    function cargarComentarios() {
-      fetch(API_URL)
-        .then(res => res.json())
-        .then(data => {
-          let html = '';
-          data.reverse().forEach(c => {
-            html += `<li>
-              <div class="comentario-fila-superior">
-                <span class="comentario-producto">${c.producto || ''}</span>
-                <span class="estrellitas-mostradas">${mostrarEstrellitas(c.estrellas)}</span>
-              </div>
-              <div class="comentario-nombre">${c.nombre}</div>
-              <div>${c.comentario || ''}</div>
-            </li>`;
-          });
-          document.getElementById('user-comentarios-list').innerHTML = html;
-        });
-    }
-    function mostrarEstrellitas(num) {
-      let n = parseInt(num) || 0;
-      return '★'.repeat(n) + '☆'.repeat(5 - n);
-    }
+    marcarEstrellas(0);
+    renderUserComentarios();
 
-    // Cargar comentarios al principio
-    cargarComentarios();
+    showScreen('landing');
+    renderCarrito();
   </script>
 </body>
 </html>
