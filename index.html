@@ -260,7 +260,6 @@
       letter-spacing: .03em;
       transition: opacity .3s;
     }
-    /* --- Comentarios más compactos --- */
     .testimonials-section {
       padding: 18px 3vw !important;
       margin: 32px 0 !important;
@@ -453,14 +452,11 @@
     <section class="testimonials-section">
       <h2>Lo que dicen nuestros clientes</h2>
       <ul id="user-comentarios-list"></ul>
-      <!-- Formulario de comentarios debajo de los comentarios existentes -->
       <form class="comentarios-form" id="form-comentario" autocomplete="off">
         <input type="text" id="nombre-comentario" placeholder="Nombre y apellido" maxlength="40" required>
         <select id="producto-comentario" required>
           <option value="">Seleccioná el producto</option>
-          <!-- Opciones llenadas con JS -->
         </select>
-        <!-- Estrellas: más visible, más grandes y arriba del textarea -->
         <label style="font-weight:bold; margin-bottom:2px; margin-top:2px; color:#5B854B; font-size:1em;">
           Elegí tu calificación:
           <div class="estrellas-selector" id="estrellas-selector" aria-label="Selecciona cuántas estrellas" style="font-size:1.3em; margin:2px 0 0 0;">
@@ -479,7 +475,6 @@
   </div>
   <div id="shop-page" class="main-screen">
     <div class="main-wrapper">
-      ...
       <aside class="banner-lateral">
         <p>¡Promoción especial!</p>
         <p>
@@ -495,105 +490,107 @@
         </p>
         <span id="mensaje-copiado" style="display:none; color: #4d7836; font-size:0.96em; margin-left:8px;">¡Enlace copiado!</span>
       </aside>
-      ...
-      <!-- El resto de tu contenido de tienda aquí -->
+      <!-- ...Resto de la tienda aquí... -->
     </div>
   </div>
-  <div id="mensaje-carrito"></div>
-  <!-- Tu script de comentarios y copiar enlace, al final, antes de </body> -->
   <script>
-const API_URL = "https://script.google.com/macros/s/AKfycby_m6X30NqqsRijkRQL293MnPEzMh1-y_Qm3fiovbJpHkfAcDPvbseJmoumiE3Y-rY/exec";
-
-// Manejo de las estrellas visualmente:
-let estrellasSeleccionadas = 0;
-const estrellas = document.querySelectorAll('#estrellas-selector .estrella');
-const estrellasTexto = document.getElementById('estrellas-texto');
-
-estrellas.forEach((estrella, idx) => {
-  estrella.addEventListener('click', () => setEstrellas(idx + 1));
-  estrella.addEventListener('keydown', e => {
-    if (e.key === "Enter" || e.key === " ") setEstrellas(idx + 1);
-  });
-});
-
-function setEstrellas(valor) {
-  estrellasSeleccionadas = valor;
-  estrellas.forEach((e, i) => {
-    e.classList.toggle('seleccionada', i < valor);
-  });
-  estrellasTexto.textContent = valor > 0 ? `${valor} estrella${valor > 1 ? "s" : ""}` : '';
-}
-
-// Enviar comentario
-document.getElementById('form-comentario').addEventListener('submit', function(e) {
-  e.preventDefault();
-  const nombre = document.getElementById('nombre-comentario').value.trim();
-  const producto = document.getElementById('producto-comentario').value;
-  const comentario = document.getElementById('texto-comentario').value.trim();
-  const estrellas = estrellasSeleccionadas;
-
-  if (!nombre || !producto || estrellas < 1) {
-    alert("Por favor completá nombre, producto y calificación.");
-    return;
-  }
-
-  fetch(API_URL, {
-    method: 'POST',
-    body: JSON.stringify({nombre, producto, estrellas, comentario}),
-    headers: {'Content-Type': 'application/json'}
-  }).then(() => {
-    document.getElementById('form-comentario').reset();
-    setEstrellas(0);
-    cargarComentarios();
-  });
-});
-
-// Mostrar comentarios
-function cargarComentarios() {
-  fetch(API_URL)
-    .then(res => res.json())
-    .then(data => {
-      let html = '';
-      data.reverse().forEach(c => {
-        html += `<li>
-          <div class="comentario-fila-superior">
-            <span class="comentario-producto">${c.producto || ''}</span>
-            <span class="estrellitas-mostradas">${mostrarEstrellitas(c.estrellas)}</span>
-          </div>
-          <div class="comentario-nombre">${c.nombre}</div>
-          <div>${c.comentario || ''}</div>
-        </li>`;
+    // Navegación entre pantallas
+    function showScreen(screenToShow) {
+      document.getElementById('landing-page').style.display = 'none';
+      document.getElementById('shop-page').style.display = 'none';
+      if (screenToShow === 'landing') {
+        document.getElementById('landing-page').style.display = 'block';
+      } else {
+        document.getElementById('shop-page').style.display = 'block';
+      }
+    }
+    function showTienda() { showScreen('shop'); }
+    document.getElementById('show-informativa').onclick = () => showScreen('landing');
+    document.getElementById('show-tienda').onclick = showTienda;
+    showScreen('landing');
+  </script>
+  <script>
+    // Comentarios conectados a Google Sheets
+    const API_URL = "https://script.google.com/macros/s/AKfycby_m6X30NqqsRijkRQL293MnPEzMh1-y_Qm3fiovbJpHkfAcDPvbseJmoumiE3Y-rY/exec";
+    let estrellasSeleccionadas = 0;
+    const estrellas = document.querySelectorAll('#estrellas-selector .estrella');
+    const estrellasTexto = document.getElementById('estrellas-texto');
+    estrellas.forEach((estrella, idx) => {
+      estrella.addEventListener('click', () => setEstrellas(idx + 1));
+      estrella.addEventListener('keydown', e => {
+        if (e.key === "Enter" || e.key === " ") setEstrellas(idx + 1);
       });
-      document.getElementById('user-comentarios-list').innerHTML = html;
     });
-}
-
-function mostrarEstrellitas(num) {
-  let n = parseInt(num) || 0;
-  return '★'.repeat(n) + '☆'.repeat(5 - n);
-}
-
-// (Opcional) Llenar el select con productos si lo deseas
-const productos = ["Mix Orgánico", "Granola", "Pan de semillas"];
-const select = document.getElementById('producto-comentario');
-productos.forEach(prod => {
-  const opt = document.createElement('option');
-  opt.value = prod;
-  opt.textContent = prod;
-  select.appendChild(opt);
-});
-
-cargarComentarios();
-</script>
+    function setEstrellas(valor) {
+      estrellasSeleccionadas = valor;
+      estrellas.forEach((e, i) => {
+        e.classList.toggle('seleccionada', i < valor);
+      });
+      estrellasTexto.textContent = valor > 0 ? `${valor} estrella${valor > 1 ? "s" : ""}` : '';
+    }
+    document.getElementById('form-comentario').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const nombre = document.getElementById('nombre-comentario').value.trim();
+      const producto = document.getElementById('producto-comentario').value;
+      const comentario = document.getElementById('texto-comentario').value.trim();
+      const estrellas = estrellasSeleccionadas;
+      if (!nombre || !producto || estrellas < 1) {
+        alert("Por favor completá nombre, producto y calificación.");
+        return;
+      }
+      fetch(API_URL, {
+        method: 'POST',
+        body: JSON.stringify({nombre, producto, estrellas, comentario}),
+        headers: {'Content-Type': 'application/json'}
+      }).then(() => {
+        document.getElementById('form-comentario').reset();
+        setEstrellas(0);
+        cargarComentarios();
+      });
+    });
+    function cargarComentarios() {
+      fetch(API_URL)
+        .then(res => res.json())
+        .then(data => {
+          let html = '';
+          data.reverse().forEach(c => {
+            html += `<li>
+              <div class="comentario-fila-superior">
+                <span class="comentario-producto">${c.producto || ''}</span>
+                <span class="estrellitas-mostradas">${mostrarEstrellitas(c.estrellas)}</span>
+              </div>
+              <div class="comentario-nombre">${c.nombre}</div>
+              <div>${c.comentario || ''}</div>
+            </li>`;
+          });
+          document.getElementById('user-comentarios-list').innerHTML = html;
+        });
+    }
+    function mostrarEstrellitas(num) {
+      let n = parseInt(num) || 0;
+      return '★'.repeat(n) + '☆'.repeat(5 - n);
+    }
+    // Opcional: Llenar el select con productos
+    const productos = ["Mix Orgánico", "Granola", "Pan de semillas"];
+    const select = document.getElementById('producto-comentario');
+    productos.forEach(prod => {
+      const opt = document.createElement('option');
+      opt.value = prod;
+      opt.textContent = prod;
+      select.appendChild(opt);
+    });
+    cargarComentarios();
+  </script>
   <script>
-document.getElementById('copiar-promo-link').addEventListener('click', function() {
-  const link = document.getElementById('promo-link').href;
-  navigator.clipboard.writeText(link).then(function() {
-    const msj = document.getElementById('mensaje-copiado');
-    msj.style.display = 'inline';
-    setTimeout(() => { msj.style.display = 'none'; }, 1700);
-  });
-});
-</script>
+    // Botón "Copiar enlace"
+    document.getElementById('copiar-promo-link').addEventListener('click', function() {
+      const link = document.getElementById('promo-link').href;
+      navigator.clipboard.writeText(link).then(function() {
+        const msj = document.getElementById('mensaje-copiado');
+        msj.style.display = 'inline';
+        setTimeout(() => { msj.style.display = 'none'; }, 1700);
+      });
+    });
+  </script>
 </body>
 </html>
