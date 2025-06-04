@@ -399,6 +399,91 @@
     }
   </style>
 </head>
+<script>
+const API_URL = "https://script.google.com/macros/s/AKfycby_m6X30NqqsRijkRQL293MnPEzMh1-y_Qm3fiovbJpHkfAcDPvbseJmoumiE3Y-rY/exec"; // <-- Pega aquí la URL de tu Apps Script
+
+// Manejo de las estrellas visualmente:
+let estrellasSeleccionadas = 0;
+const estrellas = document.querySelectorAll('#estrellas-selector .estrella');
+const estrellasTexto = document.getElementById('estrellas-texto');
+
+estrellas.forEach((estrella, idx) => {
+  estrella.addEventListener('click', () => setEstrellas(idx + 1));
+  estrella.addEventListener('keydown', e => {
+    if (e.key === "Enter" || e.key === " ") setEstrellas(idx + 1);
+  });
+});
+
+function setEstrellas(valor) {
+  estrellasSeleccionadas = valor;
+  estrellas.forEach((e, i) => {
+    e.classList.toggle('seleccionada', i < valor);
+  });
+  estrellasTexto.textContent = valor > 0 ? `${valor} estrella${valor > 1 ? "s" : ""}` : '';
+}
+
+// Enviar comentario
+document.getElementById('form-comentario').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const nombre = document.getElementById('nombre-comentario').value.trim();
+  const producto = document.getElementById('producto-comentario').value;
+  const comentario = document.getElementById('texto-comentario').value.trim();
+  const estrellas = estrellasSeleccionadas;
+
+  if (!nombre || !producto || estrellas < 1) {
+    alert("Por favor completá nombre, producto y calificación.");
+    return;
+  }
+
+  fetch(API_URL, {
+    method: 'POST',
+    body: JSON.stringify({nombre, producto, estrellas, comentario}),
+    headers: {'Content-Type': 'application/json'}
+  }).then(() => {
+    document.getElementById('form-comentario').reset();
+    setEstrellas(0);
+    cargarComentarios();
+  });
+});
+
+// Mostrar comentarios
+function cargarComentarios() {
+  fetch(API_URL)
+    .then(res => res.json())
+    .then(data => {
+      let html = '';
+      data.reverse().forEach(c => {
+        html += `<li>
+          <div class="comentario-fila-superior">
+            <span class="comentario-producto">${c.producto || ''}</span>
+            <span class="estrellitas-mostradas">${mostrarEstrellitas(c.estrellas)}</span>
+          </div>
+          <div class="comentario-nombre">${c.nombre}</div>
+          <div>${c.comentario || ''}</div>
+        </li>`;
+      });
+      document.getElementById('user-comentarios-list').innerHTML = html;
+    });
+}
+
+function mostrarEstrellitas(num) {
+  let n = parseInt(num) || 0;
+  return '★'.repeat(n) + '☆'.repeat(5 - n);
+}
+
+// (OPCIONAL) Si quieres llenar el select de productos dinámicamente desde JS, hazlo aquí
+// Por ejemplo:
+const productos = ["Mix Orgánico", "Granola", "Pan de semillas"];
+const select = document.getElementById('producto-comentario');
+productos.forEach(prod => {
+  const opt = document.createElement('option');
+  opt.value = prod;
+  opt.textContent = prod;
+  select.appendChild(opt);
+});
+
+cargarComentarios();
+</script>
 <body>
   <header>
     <h1>SantaAvena: Lo Mejor de la Avena, Hecho con Amor en Santa Elena.</h1>
