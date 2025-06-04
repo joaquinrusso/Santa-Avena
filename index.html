@@ -5,6 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>SantaAvena: Comida Orgánica</title>
   <style>
+    :root {
+      --verde-principal: #8DC572;
+      --verde-oscuro: #5B854B;
+      --verde-medio: #AACFA5;
+      --beige: #FFF9ED;
+      --blanco: #fff;
+      --gris: #ececec;
+      --gris-texto: #555;
+      --sombra: 0 8px 32px 0 rgba(60,90,60,0.12);
+      --radius: 18px;
+      --trans-smooth: cubic-bezier(.55,.13,.39,1.03);
+      --blur: blur(3px);
+    }
+    html { scroll-behavior: smooth; }
     body {
       background: url('imagenes/alpaca.jpg') center/cover no-repeat fixed;
       min-height: 100vh; margin: 0; font-family: 'Segoe UI', Arial, sans-serif;
@@ -829,24 +843,6 @@
 
     showScreen('landing');
     renderCarrito();
-  </script><section id="comentarios">
-  <h2>Comentarios</h2>
-  <div id="disqus_thread"></div>
-  <script>
-      /*
-      var disqus_config = function () {
-      this.page.url = "https://joaquinrusso.github.io/Santa-Avena/";  // URL pública de tu sitio
-      this.page.identifier = "santa-avena-home"; // Identificador único para la página, puedes dejarlo así si solo tienes una página
-      };
-      */
-      (function() { // DON'T EDIT BELOW THIS LINE
-      var d = document, s = d.createElement('script');
-      s.src = 'https://santaavena.disqus.com/embed.js';
-      s.setAttribute('data-timestamp', +new Date());
-      (d.head || d.body).appendChild(s);
-      })();
   </script>
-  <noscript>Por favor habilita JavaScript para ver los <a href="https://disqus.com/?ref_noscript">comentarios provistos por Disqus.</a></noscript>
-</section>
 </body>
 </html>
