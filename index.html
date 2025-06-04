@@ -17,6 +17,8 @@
       --radius: 18px;
       --trans-smooth: cubic-bezier(.55,.13,.39,1.03);
       --blur: blur(3px);
+      --verde-copiado: #a7e27b;
+      --verde-copiado-hover: #91c96b;
     }
     html { scroll-behavior: smooth; }
     body {
@@ -135,6 +137,73 @@
     }
     @keyframes fadeInRight { from {opacity:0; transform:translateX(30px);} to {opacity:1;transform:none;}}
     .banner-lateral strong { color: #5b854b; font-size: 1.2em; }
+    .promo-link-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      margin-top: 12px;
+      flex-wrap: wrap;
+    }
+    .promo-link-row a {
+      color:#4d7836;
+      font-weight:bold;
+      text-decoration:underline;
+      word-break:break-all;
+      font-size: 1em;
+      transition: color .19s;
+      padding: 3px 0;
+    }
+    .promo-link-row a:hover,
+    .promo-link-row a:focus {
+      color: var(--verde-oscuro);
+      outline: none;
+    }
+    .btn-copiar-link {
+      background: #e9f6da;
+      color: #4d7836;
+      border: none;
+      border-radius: 100px;
+      padding: 7px 19px;
+      font-size: 1em;
+      font-weight: 600;
+      cursor: pointer;
+      margin-left: 1px;
+      box-shadow: 0 1px 10px #0001;
+      transition: background .35s var(--trans-smooth), color .25s, transform .19s;
+      outline: none;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      position: relative;
+      z-index: 1;
+      user-select: none;
+    }
+    .btn-copiar-link.copiado {
+      background: var(--verde-copiado);
+      color: #334c23;
+      transform: scale(1.08);
+      box-shadow: 0 2px 18px #a7e27b55;
+      animation: botonCopiado .6s;
+    }
+    .btn-copiar-link svg {
+      width: 1.1em;
+      height: 1.1em;
+      vertical-align: middle;
+      margin-bottom: 1px;
+      opacity: 0.83;
+      transition: opacity .19s;
+    }
+    .btn-copiar-link.copiado svg {
+      opacity: 1;
+      color: #406b1e;
+    }
+    @keyframes botonCopiado {
+      0% {transform: scale(1);}
+      35% {transform: scale(1.14);}
+      60% {transform: scale(1.08);}
+      100% {transform: scale(1.08);}
+    }
     section { margin-bottom: 38px; }
     h2 {
       border-bottom: 2px solid #e9e9e9;
@@ -260,7 +329,6 @@
       letter-spacing: .03em;
       transition: opacity .3s;
     }
-    /* --- Comentarios más compactos --- */
     .testimonials-section {
       padding: 18px 3vw !important;
       margin: 32px 0 !important;
@@ -387,6 +455,7 @@
       .banner-lateral { position: static; width: 97%; margin-bottom: 30px; order: -1; }
       .container { padding: 0 2vw; max-width: 100%; }
       .productos-grid { grid-template-columns: 1fr; }
+      .promo-link-row { flex-direction: column; align-items: stretch; }
     }
     @media (max-width: 600px) {
       .main-screen {padding: 9px 0;}
@@ -396,6 +465,7 @@
       h1 {font-size:1.11em;}
       .comentarios-section {padding: 8px 0 0 0;}
       .comentario-fila-superior {flex-direction: column; align-items: flex-start;}
+      .banner-lateral { font-size: 1em;}
     }
   </style>
 </head>
@@ -479,20 +549,20 @@
   </div>
   <div id="shop-page" class="main-screen">
     <div class="main-wrapper">
-      ...
       <aside class="banner-lateral">
         <p>¡Promoción especial!</p>
         <p>Compartiendo una historia de tu pedido y etiquetando <strong>EL LINK</strong> de la página, tenés un <strong>10% de descuento</strong> en tu próximo pedido.</p>
-        <p style="word-break:break-all; margin-top:12px;">
-          <a href="https://joaquinrusso.github.io/Santa-Avena/" target="_blank" style="color:#4d7836;font-weight:bold; text-decoration:underline;">
+        <div class="promo-link-row">
+          <a id="promo-link" href="https://joaquinrusso.github.io/Santa-Avena/" target="_blank">
             https://joaquinrusso.github.io/Santa-Avena/
           </a>
-        </p>
+          <button class="btn-copiar-link" id="btn-copiar-link" type="button">
+            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M7.5 4a2.5 2.5 0 0 0-2.5 2.5v7A2.5 2.5 0 0 0 7.5 16h5a2.5 2.5 0 0 0 2.5-2.5v-7A2.5 2.5 0 0 0 12.5 4h-5ZM6 6.5A1.5 1.5 0 0 1 7.5 5h5A1.5 1.5 0 0 1 14 6.5v7a1.5 1.5 0 0 1-1.5 1.5h-5A1.5 1.5 0 0 1 6 13.5v-7ZM3.5 7.5a.5.5 0 0 1 .5.5v6A4.5 4.5 0 0 0 8.5 18h3a.5.5 0 1 1 0 1h-3A5.5 5.5 0 0 1 3 13.5v-6a.5.5 0 0 1 .5-.5Z"/></svg>
+            <span id="texto-btn-copiar">Copiar enlace</span>
+          </button>
+        </div>
       </aside>
-...
       <div class="container">
-        ...
-        ...
         <section class="seccion-tienda" id="seccion-snacks">
           <h2>Snacks</h2>
           <div class="productos-grid">
@@ -540,7 +610,6 @@
             </div>
           </div>
         </section>
-        <!-- Nueva sección de Promociones -->
         <section class="seccion-tienda" id="seccion-promos">
           <h2>Promociones</h2>
           <div class="productos-grid">
@@ -579,9 +648,6 @@
             </div>
           </div>
         </section>
-...
-...
-        ...
         <section class="seccion-tienda" id="seccion-productos">
           <h2>Productos</h2>
           <div class="productos-grid">
@@ -620,7 +686,6 @@
             </div>
           </div>
         </section>
-...
         <section id="pedido" style="display:block;">
           <h2>Tu Pedido</h2>
           <div id="carrito-box">
@@ -763,11 +828,31 @@
     showInformativaBtn.addEventListener('click', actualizarProductosSnacks);
     showTiendaBtn.addEventListener('click', actualizarProductosSnacks);
 
+    // --- BOTÓN COPIAR ENLACE PROMO ---
+    document.addEventListener('DOMContentLoaded', function() {
+      const btnCopiar = document.getElementById('btn-copiar-link');
+      const promoLink = document.getElementById('promo-link');
+      const textoBtn = document.getElementById('texto-btn-copiar');
+      let timeoutCopiado;
+      btnCopiar.addEventListener('click', async function() {
+        try {
+          await navigator.clipboard.writeText(promoLink.href);
+          btnCopiar.classList.add('copiado');
+          textoBtn.textContent = '¡Copiado!';
+          clearTimeout(timeoutCopiado);
+          timeoutCopiado = setTimeout(() => {
+            btnCopiar.classList.remove('copiado');
+            textoBtn.textContent = 'Copiar enlace';
+          }, 1300);
+        } catch (e) {
+          textoBtn.textContent = 'Error';
+        }
+      });
+    });
+
     // ------ COMENTARIOS CON GOOGLE SHEETS ------
-    // Cambia esta variable por la URL de tu API de Google Apps Script
     const SHEET_API_URL = "https://script.google.com/macros/s/AKfycby_m6X30NqqsRijkRQL293MnPEzMh1-y_Qm3fiovbJpHkfAcDPvbseJmoumiE3Y-rY/exec";
 
-    // Leer y renderizar comentarios desde Google Sheets
     async function renderUserComentarios() {
       const lista = document.getElementById('user-comentarios-list');
       lista.innerHTML = 'Cargando comentarios...';
@@ -800,7 +885,6 @@
       }
     }
 
-    // Guardar comentario en Google Sheets
     document.getElementById('form-comentario').onsubmit = async function(e) {
       e.preventDefault();
       const nombre = document.getElementById('nombre-comentario').value.trim();
@@ -834,8 +918,6 @@
         alert("No se pudo guardar tu comentario. Intenta de nuevo.");
       }
     };
-
-    // ------ FIN GOOGLE SHEETS COMENTARIOS ------
 
     // Selector de estrellas
     let estrellasSeleccionadas = 0;
