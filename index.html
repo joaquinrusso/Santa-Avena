@@ -20,7 +20,7 @@
       --verde-copiado: #a7e27b;
       --verde-copiado-hover: #91c96b;
     }
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; font-size: 18px;}
     body {
       background: url('imagenes/alpaca.jpg') center/cover no-repeat fixed;
       min-height: 100vh; margin: 0; font-family: 'Segoe UI', Arial, sans-serif;
@@ -451,6 +451,7 @@
       letter-spacing: 0.02em;
     }
     @media (max-width: 900px) {
+      html { font-size: 16px; }
       .main-wrapper { flex-direction: column; align-items: center; }
       .banner-lateral { position: static; width: 97%; margin-bottom: 30px; order: -1; }
       .container { padding: 0 2vw; max-width: 100%; }
@@ -458,14 +459,26 @@
       .promo-link-row { flex-direction: column; align-items: stretch; }
     }
     @media (max-width: 600px) {
-      .main-screen {padding: 9px 0;}
-      .info-section, .featured-products-section, .testimonials-section {padding: 14px 2vw;}
-      header { padding: 13px 0 8px 0;}
-      nav button { padding: 8px 12px; font-size:1em;}
+      html { font-size: 15px;}
+      .main-screen {padding: 7px 0;}
+      .info-section, .featured-products-section, .testimonials-section {padding: 10px 2vw;}
+      header { padding: 10px 0 7px 0;}
+      nav button { padding: 7px 9px; font-size:0.96em;}
       h1 {font-size:1.11em;}
-      .comentarios-section {padding: 8px 0 0 0;}
+      .testimonials-section {padding: 7px 1vw !important;}
+      .comentarios-section {padding: 6px 0 0 0;}
       .comentario-fila-superior {flex-direction: column; align-items: flex-start;}
-      .banner-lateral { font-size: 1em;}
+      .banner-lateral { font-size: 0.97em; padding: 12px 5px; width: 100%; }
+      .productos-grid { gap: 13px; }
+      .producto-card { min-height: 230px; padding: 10px; }
+      .producto-card img { height: 85px; }
+      .producto-info h3 { font-size: 1em;}
+      .producto-controls input[type="number"] { width: 38px; padding: 6px; font-size: 1em;}
+      .producto-controls button { padding: 7px 10px; font-size: 0.97em;}
+      .producto-precio { font-size: 1em; }
+      .comentarios-form { font-size: 0.93em; padding: 6px 3px; }
+      .comentarios-form input, .comentarios-form textarea, .comentarios-form select { font-size: 0.93em; }
+      .btn-copiar-link { font-size: 0.97em; padding: 6px 13px;}
     }
   </style>
 </head>
