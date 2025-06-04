@@ -475,43 +475,47 @@
   </div>
   <div id="shop-page" class="main-screen">
     <div class="main-wrapper">
+      ...
       <aside class="banner-lateral">
         <p>¡Promoción especial!</p>
-        <p>
-          Compartiendo una historia de tu pedido y etiquetando <strong>EL LINK</strong> de la página, tenés un <strong>10% de descuento</strong> en tu próximo pedido.
-        </p>
-        <p style="word-break:break-all;">
-          <a id="promo-link" href="https://joaquinrusso.github.io/Santa-Avena/" target="_blank" style="color:#4d7836; font-weight:bold; text-decoration:underline;">
+        <p>Compartiendo una historia de tu pedido y etiquetando <strong>EL LINK</strong> de la página, tenés un <strong>10% de descuento</strong> en tu próximo pedido.</p>
+        <p style="word-break:break-all; margin-top:12px;">
+          <a href="https://joaquinrusso.github.io/Santa-Avena/" target="_blank" style="color:#4d7836;font-weight:bold; text-decoration:underline;">
             https://joaquinrusso.github.io/Santa-Avena/
           </a>
-          <button id="copiar-promo-link" style="margin-left:10px; padding:3px 9px; font-size:0.98em; border-radius:5px; border:1px solid #b7d7b3; background:#f4fff0; color:#314e26; cursor:pointer;">
-            Copiar enlace
-          </button>
         </p>
-        <span id="mensaje-copiado" style="display:none; color: #4d7836; font-size:0.96em; margin-left:8px;">¡Enlace copiado!</span>
       </aside>
-      <!-- ...Resto de la tienda aquí... -->
+      <!-- ... resto de la tienda ... -->
+      <!-- No se replica toda la tienda aquí por longitud, pero debe ir tu código original -->
     </div>
   </div>
+  <div id="mensaje-carrito"></div>
   <script>
-    // Navegación entre pantallas
+    // Pantallas
     function showScreen(screenToShow) {
-      document.getElementById('landing-page').style.display = 'none';
-      document.getElementById('shop-page').style.display = 'none';
+      landingPage.style.display = 'none';
+      shopPage.style.display = 'none';
       if (screenToShow === 'landing') {
-        document.getElementById('landing-page').style.display = 'block';
+        landingPage.style.display = 'block';
       } else {
-        document.getElementById('shop-page').style.display = 'block';
+        shopPage.style.display = 'block';
       }
     }
     function showTienda() { showScreen('shop'); }
-    document.getElementById('show-informativa').onclick = () => showScreen('landing');
-    document.getElementById('show-tienda').onclick = showTienda;
+    const landingPage = document.getElementById('landing-page');
+    const shopPage = document.getElementById('shop-page');
+    const showInformativaBtn = document.getElementById('show-informativa');
+    const showTiendaBtn = document.getElementById('show-tienda');
+    showInformativaBtn.onclick = () => showScreen('landing');
+    showTiendaBtn.onclick = showTienda;
     showScreen('landing');
+    // ... El resto de tu script para carrito, productos, etc. ...
   </script>
   <script>
     // Comentarios conectados a Google Sheets
-    const API_URL = "https://script.google.com/macros/s/AKfycby_m6X30NqqsRijkRQL293MnPEzMh1-y_Qm3fiovbJpHkfAcDPvbseJmoumiE3Y-rY/exec";
+    const API_URL = "https://script.google.com/macros/s/AKfycby_m6X30NqqsRijkRQL293MnPEzMh1-y_Qm3fiovbJpHkfAcDPvbseJmoumiE3Y-rY/exec"; // <--- Pega aquí tu URL de Apps Script
+
+    // Manejo de estrellas visuales
     let estrellasSeleccionadas = 0;
     const estrellas = document.querySelectorAll('#estrellas-selector .estrella');
     const estrellasTexto = document.getElementById('estrellas-texto');
@@ -528,16 +532,38 @@
       });
       estrellasTexto.textContent = valor > 0 ? `${valor} estrella${valor > 1 ? "s" : ""}` : '';
     }
+
+    // Llenar select de productos desde los snacks de la tienda
+    function actualizarProductosSnacks() {
+      const snacks = document.querySelectorAll('#seccion-snacks .producto-card[data-nombre]');
+      const select = document.getElementById('producto-comentario');
+      if (!select) return;
+      select.innerHTML = '<option value="">Seleccioná el producto</option>';
+      snacks.forEach(card=>{
+        const nombre = card.dataset.nombre;
+        const opt = document.createElement('option');
+        opt.value = nombre;
+        opt.textContent = nombre;
+        select.appendChild(opt);
+      });
+    }
+    document.addEventListener('DOMContentLoaded', actualizarProductosSnacks);
+    showInformativaBtn.addEventListener('click', actualizarProductosSnacks);
+    showTiendaBtn.addEventListener('click', actualizarProductosSnacks);
+
+    // Enviar comentario a Google Sheets
     document.getElementById('form-comentario').addEventListener('submit', function(e) {
       e.preventDefault();
       const nombre = document.getElementById('nombre-comentario').value.trim();
       const producto = document.getElementById('producto-comentario').value;
       const comentario = document.getElementById('texto-comentario').value.trim();
       const estrellas = estrellasSeleccionadas;
+
       if (!nombre || !producto || estrellas < 1) {
         alert("Por favor completá nombre, producto y calificación.");
         return;
       }
+
       fetch(API_URL, {
         method: 'POST',
         body: JSON.stringify({nombre, producto, estrellas, comentario}),
@@ -548,6 +574,8 @@
         cargarComentarios();
       });
     });
+
+    // Mostrar comentarios desde Google Sheets
     function cargarComentarios() {
       fetch(API_URL)
         .then(res => res.json())
@@ -570,27 +598,9 @@
       let n = parseInt(num) || 0;
       return '★'.repeat(n) + '☆'.repeat(5 - n);
     }
-    // Opcional: Llenar el select con productos
-    const productos = ["Mix Orgánico", "Granola", "Pan de semillas"];
-    const select = document.getElementById('producto-comentario');
-    productos.forEach(prod => {
-      const opt = document.createElement('option');
-      opt.value = prod;
-      opt.textContent = prod;
-      select.appendChild(opt);
-    });
+
+    // Cargar comentarios al principio
     cargarComentarios();
-  </script>
-  <script>
-    // Botón "Copiar enlace"
-    document.getElementById('copiar-promo-link').addEventListener('click', function() {
-      const link = document.getElementById('promo-link').href;
-      navigator.clipboard.writeText(link).then(function() {
-        const msj = document.getElementById('mensaje-copiado');
-        msj.style.display = 'inline';
-        setTimeout(() => { msj.style.display = 'none'; }, 1700);
-      });
-    });
   </script>
 </body>
 </html>
