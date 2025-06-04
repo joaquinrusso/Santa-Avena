@@ -567,10 +567,18 @@ cargarComentarios();
       ...
       <aside class="banner-lateral">
         <p>¡Promoción especial!</p>
-        <p>Compartiendo una historia de tu pedido y etiquetando <strong>EL LINK</strong> de la página, tenés un <strong>10% de descuento</strong> en tu próximo pedido.</p>
-        <p style="word-break:break-all; margin-top:12px;">
-          <a href="https://joaquinrusso.github.io/Santa-Avena/" target="_blank" style="color:#4d7836;font-weight:bold; text-decoration:underline;">
-            https://joaquinrusso.github.io/Santa-Avena/
+<p>
+  Compartiendo una historia de tu pedido y etiquetando <strong>EL LINK</strong> de la página, tenés un <strong>10% de descuento</strong> en tu próximo pedido.
+</p>
+<p style="word-break:break-all;">
+  <a id="promo-link" href="https://joaquinrusso.github.io/Santa-Avena/" target="_blank" style="color:#4d7836; font-weight:bold; text-decoration:underline;">
+    https://joaquinrusso.github.io/Santa-Avena/
+  </a>
+  <button id="copiar-promo-link" style="margin-left:10px; padding:3px 9px; font-size:0.98em; border-radius:5px; border:1px solid #b7d7b3; background:#f4fff0; color:#314e26; cursor:pointer;">
+    Copiar enlace
+  </button>
+</p>
+<span id="mensaje-copiado" style="display:none; color: #4d7836; font-size:0.96em; margin-left:8px;">¡Enlace copiado!</span>
           </a>
         </p>
       </aside>
@@ -929,5 +937,15 @@ cargarComentarios();
     showScreen('landing');
     renderCarrito();
   </script>
+<script>
+document.getElementById('copiar-promo-link').addEventListener('click', function() {
+  const link = document.getElementById('promo-link').href;
+  navigator.clipboard.writeText(link).then(function() {
+    const msj = document.getElementById('mensaje-copiado');
+    msj.style.display = 'inline';
+    setTimeout(() => { msj.style.display = 'none'; }, 1700);
+  });
+});
+</script>
 </body>
 </html>
