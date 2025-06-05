@@ -496,23 +496,69 @@
     </nav>
   </header>
   <div id="landing-page" class="main-screen">
-    <section class="featured-products-section">
-      <h2>Nuestros Imprescindibles: Sabor y Bienestar</h2>
-      <p class="section-description">
-        Snacks proteicos para acompañar tus desayunos/meriendas. ¡Alimento de verdad!
-      </p>
-      <div class="productos-grid">
-  <div class="producto-card">
-    <img src="imagenes/budin.jpg" alt="Budín Orgánico de Avena y Superalimentos" />
-    <div class="producto-info">
-      <h3 style="text-align:center;">Budín Orgánico de Avena</h3>
-      <!-- INGREDIENTES REMOVIDOS -->
-      <div class="valores-titulo" style="margin-top:20px;">VALORES NUTRICIONALES</div>
-      <div class="valores-lista">
-        63 g proteína<br>
-        260 g carbohidratos<br>
-        36 g fibra
+    <!-- INICIO (Landing Page) -->
+<div id="landing-page" class="main-screen">
+  <section class="featured-products-section">
+    <h2>Nuestros Imprescindibles: Sabor y Bienestar</h2>
+    <p class="section-description">
+      Snacks proteicos para acompañar tus desayunos/meriendas. ¡Alimento de verdad!
+    </p>
+    <div class="productos-grid">
+      <div class="producto-card">
+        <img src="imagenes/budin.jpg" alt="Budín Orgánico de Avena y Superalimentos" />
+        <div class="producto-info">
+          <h3 style="text-align:center;">Budín Orgánico de Avena</h3>
+          <!-- INGREDIENTES REMOVIDOS -->
+          <div class="valores-titulo" style="margin-top:20px;">VALORES NUTRICIONALES</div>
+          <div class="valores-lista">
+            63 g proteína<br>
+            260 g carbohidratos<br>
+            36 g fibra
+          </div>
+          <button class="action-button" onclick="showTienda()">Ver</button>
+        </div>
       </div>
+      <div class="producto-card">
+        <img src="imagenes/galletaavena.jpg" alt="Galletas de Avena (chocolate)" />
+        <div class="producto-info">
+          <h3 style="text-align:center;">Galletas de Avena (chocolate)</h3>
+          <!-- INGREDIENTES REMOVIDOS -->
+          <div class="valores-titulo" style="margin-top:20px;">VALORES NUTRICIONALES</div>
+          <div class="valores-lista">
+            6 g proteína<br>
+            2 g fibra<br>
+            150 kcal
+          </div>
+          <button class="action-button" onclick="showTienda()">Ver</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="testimonials-section">
+    <h2>Lo que dicen nuestros clientes</h2>
+    <ul id="user-comentarios-list"></ul>
+    <form class="comentarios-form" id="form-comentario" autocomplete="off">
+      <input type="text" id="nombre-comentario" placeholder="Nombre y apellido" maxlength="40" required>
+      <select id="producto-comentario" required>
+        <option value="">Seleccioná el producto</option>
+      </select>
+      <label style="font-weight:bold; margin-bottom:2px; margin-top:2px; color:#5B854B; font-size:1em;">
+        Elegí tu calificación:
+        <div class="estrellas-selector" id="estrellas-selector" aria-label="Selecciona cuántas estrellas" style="font-size:1.3em; margin:2px 0 0 0;">
+          <span class="estrella" data-valor="1" tabindex="0">&#9733;</span>
+          <span class="estrella" data-valor="2" tabindex="0">&#9733;</span>
+          <span class="estrella" data-valor="3" tabindex="0">&#9733;</span>
+          <span class="estrella" data-valor="4" tabindex="0">&#9733;</span>
+          <span class="estrella" data-valor="5" tabindex="0">&#9733;</span>
+          <span id="estrellas-texto" style="margin-left:8px; font-size:.95em; color:#5B854B; vertical-align:middle;"></span>
+        </div>
+      </label>
+      <textarea id="texto-comentario" rows="2" maxlength="220" placeholder="Contános tu experiencia... (opcional)"></textarea>
+      <button type="submit">Enviar</button>
+    </form>
+  </section>
+</div>
       <button class="action-button" onclick="showTienda()">Ver</button>
     </div>
   </div>
