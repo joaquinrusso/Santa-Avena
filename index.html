@@ -5,6 +5,33 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>SantaAvena: Comida Orgánica</title>
   <style>
+    #ig-banner {
+  position: fixed;
+  top: 120px; /* Ajusta según tu header/banner */
+  right: 0;
+  background: linear-gradient(90deg,#B9005B 80%, #fff0 100%);
+  padding: 14px 20px 14px 14px;
+  border-radius: 20px 0 0 20px;
+  box-shadow: 0 4px 18px #0002;
+  z-index: 1002;
+  transition: opacity 0.3s;
+}
+#ig-banner:hover {
+  opacity: 0.88;
+  background: linear-gradient(90deg,#B9005B 70%, #f9d0e6 100%);
+}
+@media (max-width: 700px) {
+  #ig-banner {
+    top: unset;
+    bottom: 14px;
+    right: 0;
+    left: 0;
+    margin: auto;
+    border-radius: 14px;
+    width: fit-content;
+    padding: 11px 20px;
+  }
+}
     :root {
       --verde-principal: #8DC572;
       --verde-oscuro: #5B854B;
