@@ -899,38 +899,45 @@
     }
 
     document.getElementById('form-comentario').onsubmit = async function(e) {
-      e.preventDefault();
-      const nombre = document.getElementById('nombre-comentario').value.trim();
-      const producto = document.getElementById('producto-comentario').value;
-      const texto = document.getElementById('texto-comentario').value.trim();
-      const estrellas = estrellasSeleccionadas;
+  e.preventDefault();
+  const nombre = document.getElementById('nombre-comentario').value.trim();
+  const producto = document.getElementById('producto-comentario').value;
+  const texto = document.getElementById('texto-comentario').value.trim();
+  const estrellas = estrellasSeleccionadas;
 
-      if(!nombre) {
-        alert('Por favor, ingresá tu nombre y apellido.');
-        return;
-      }
-      if(!producto) {
-        alert('Por favor, seleccioná el producto que estás reseñando.');
-        return;
-      }
-      if(!estrellas && !texto) {
-        alert('Por favor, dejá al menos un comentario o una calificación con estrellas.');
-        return;
-      }
+  if(!nombre) {
+    alert('Por favor, ingresá tu nombre y apellido.');
+    return;
+  }
+  if(!producto) {
+    alert('Por favor, seleccioná el producto que estás reseñando.');
+    return;
+  }
+  if(!estrellas && !texto) {
+    alert('Por favor, dejá al menos un comentario o una calificación con estrellas.');
+    return;
+  }
 
-      try {
-        await fetch(SHEET_API_URL, {
-          method: 'POST',
-          body: JSON.stringify({nombre, producto, texto, estrellas}),
-          headers: {'Content-Type': 'application/json'}
-        });
-        this.reset();
-        marcarEstrellas(0);
-        renderUserComentarios();
-      } catch (err) {
-        alert("No se pudo guardar tu comentario. Intenta de nuevo.");
-      }
-    };
+  try {
+    // Enviamos como form-urlencoded (evita el error de CORS)
+    const data = new URLSearchParams();
+    data.append('nombre', nombre);
+    data.append('producto', producto);
+    data.append('texto', texto);
+    data.append('estrellas', estrellas);
+
+    await fetch(SHEET_API_URL, {
+      method: 'POST',
+      body: data
+      // No pongas headers Content-Type, el navegador lo agrega solo
+    });
+    this.reset();
+    marcarEstrellas(0);
+    renderUserComentarios();
+  } catch (err) {
+    alert("No se pudo guardar tu comentario. Intenta de nuevo.");
+  }
+};
 
     // Selector de estrellas
     let estrellasSeleccionadas = 0;
