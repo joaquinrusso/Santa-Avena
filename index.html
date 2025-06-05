@@ -2,13 +2,8 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=devic
-    
-    
-    
-    e-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>SantaAvena: Comida Orgánica</title>
-}
   <style>
     :root {
       --verde-principal: #8DC572;
@@ -506,13 +501,12 @@
           <img src="imagenes/budin.jpg" alt="Budín Orgánico de Avena y Superalimentos" />
           <div class="producto-info">
             <h3 style="text-align:center;">Budín Orgánico de Avena</h3>
-            <!-- INGREDIENTES REMOVIDOS -->
             <div class="valores-titulo" style="margin-top:20px;">VALORES NUTRICIONALES</div>
-    <div class="valores-lista">
-      63 g proteína<br>
-      260 g carbohidratos<br>
-      36 g fibra
-    </div>
+            <div class="valores-lista">
+              63 g proteína<br>
+              260 g carbohidratos<br>
+              36 g fibra
+            </div>
             <button class="action-button" onclick="showTienda()">Ver</button>
           </div>
         </div>
@@ -520,7 +514,6 @@
           <img src="imagenes/galletaavena.jpg" alt="Galletas de Avena (chocolate)" />
           <div class="producto-info">
             <h3 style="text-align:center;">Galletas de Avena (chocolate)</h3>
-            <!-- INGREDIENTES REMOVIDOS -->
             <div class="valores-titulo" style="margin-top:20px;">VALORES NUTRICIONALES</div>
             <div class="valores-lista">
               6 g proteína<br>
@@ -575,22 +568,19 @@
         <section class="seccion-tienda" id="seccion-snacks">
           <h2>Snacks</h2>
           <div class="productos-grid">
-            <div class="producto-card">
+            <div class="producto-card" data-nombre="Budín Orgánico de Avena" data-precio="6500">
               <img src="imagenes/budin.jpg" alt="Budín Orgánico de Avena y Superalimentos" />
               <div class="producto-info">
-                <h3 style="text-align:center;">Budín Orgánico de Avena</h3>
-                <!-- INGREDIENTES REMOVIDOS -->
-                <div class="valores-titulo" style="margin-top:20px;">VALORES NUTRICIONALES</div>
-                <div class="valores-lista">
-                  63 g proteína<br>
-                  260 g carbohidratos<br>
-                  36 g fibra
+                <h3>Budín Orgánico de Avena</h3>
+                <p>
+                  <strong>INGREDIENTES:</strong><br>
+                  avena, nueces, azucar mascabo, coco rallado, cacao amargo, chips de chocolate semi-amargo
+                </p>
+                <div class="producto-precio">$6500</div>
+                <div class="producto-controls">
+                  <input type="number" min="1" max="20" value="1" />
+                  <button class="add-carrito">Agregar</button>
                 </div>
-                <button class="action-button" onclick="showTienda()">Ver</button>
-              </div>
-            </div>
-                </div>
-                <button class="action-button" onclick="showTienda()">Ver</button>
               </div>
             </div>
             <div class="producto-card" data-nombre="Galletas de Avena (chocolate)" data-precio="1000">
@@ -605,12 +595,6 @@
                 <div class="producto-controls">
                   <input type="number" min="1" max="20" value="1" />
                   <button class="add-carrito">Agregar</button>
-                </div>
-                <div class="valores-titulo" style="margin-top:9px;"></div>
-                <div class="valores-lista" style="font-size:0.98em;">
-                  <br>
-                  <br>
-                  
                 </div>
               </div>
             </div>
@@ -892,45 +876,45 @@
     }
 
     document.getElementById('form-comentario').onsubmit = async function(e) {
-  e.preventDefault();
-  const nombre = document.getElementById('nombre-comentario').value.trim();
-  const producto = document.getElementById('producto-comentario').value;
-  const texto = document.getElementById('texto-comentario').value.trim();
-  const estrellas = estrellasSeleccionadas;
+      e.preventDefault();
+      const nombre = document.getElementById('nombre-comentario').value.trim();
+      const producto = document.getElementById('producto-comentario').value;
+      const texto = document.getElementById('texto-comentario').value.trim();
+      const estrellas = estrellasSeleccionadas;
 
-  if(!nombre) {
-    alert('Por favor, ingresá tu nombre y apellido.');
-    return;
-  }
-  if(!producto) {
-    alert('Por favor, seleccioná el producto que estás reseñando.');
-    return;
-  }
-  if(!estrellas && !texto) {
-    alert('Por favor, dejá al menos un comentario o una calificación con estrellas.');
-    return;
-  }
+      if(!nombre) {
+        alert('Por favor, ingresá tu nombre y apellido.');
+        return;
+      }
+      if(!producto) {
+        alert('Por favor, seleccioná el producto que estás reseñando.');
+        return;
+      }
+      if(!estrellas && !texto) {
+        alert('Por favor, dejá al menos un comentario o una calificación con estrellas.');
+        return;
+      }
 
-  try {
-    // Enviamos como form-urlencoded (evita el error de CORS)
-    const data = new URLSearchParams();
-    data.append('nombre', nombre);
-    data.append('producto', producto);
-    data.append('texto', texto);
-    data.append('estrellas', estrellas);
+      try {
+        // Enviamos como form-urlencoded (evita el error de CORS)
+        const data = new URLSearchParams();
+        data.append('nombre', nombre);
+        data.append('producto', producto);
+        data.append('texto', texto);
+        data.append('estrellas', estrellas);
 
-    await fetch(SHEET_API_URL, {
-      method: 'POST',
-      body: data
-      // No pongas headers Content-Type, el navegador lo agrega solo
-    });
-    this.reset();
-    marcarEstrellas(0);
-    renderUserComentarios();
-  } catch (err) {
-    alert("No se pudo guardar tu comentario. Intenta de nuevo.");
-  }
-};
+        await fetch(SHEET_API_URL, {
+          method: 'POST',
+          body: data
+          // No pongas headers Content-Type, el navegador lo agrega solo
+        });
+        this.reset();
+        marcarEstrellas(0);
+        renderUserComentarios();
+      } catch (err) {
+        alert("No se pudo guardar tu comentario. Intenta de nuevo.");
+      }
+    };
 
     // Selector de estrellas
     let estrellasSeleccionadas = 0;
@@ -951,6 +935,17 @@
           ev.preventDefault();
           marcarEstrellas(Number(e.dataset.valor));
         }
+      });
+    });
+
+    marcarEstrellas(0);
+    renderUserComentarios();
+
+    showScreen('landing');
+    renderCarrito();
+  </script>
+</body>
+</html>
       });
     });
 
