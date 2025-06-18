@@ -540,6 +540,17 @@
             </div>
             <button class="action-button" onclick="showTienda()">Ver</button>
           </div>
+        </div><div class="producto-card">
+          <img src="imagenes/bizcocho.jpg" alt="bizcochos proteico (salados)" />
+          <div class="producto-info">
+            <h3 style="text-align:center;">bizcochos proteicos (salados)</h3>
+            <div class="valores-titulo" style="margin-top:20px;">VALORES NUTRICIONALES</div>
+            <div class="valores-lista">
+              28 g Proteína<br>
+              15 g Fibra<br>
+            </div>
+            <button class="action-button" onclick="showTienda()">Ver</button>
+          </div>
         </div>
         <div class="producto-card">
           <img src="imagenes/galletaavena.jpg" alt="Galletas de Avena (chocolate)" />
@@ -605,6 +616,22 @@
       <div class="container">
         <section class="seccion-tienda" id="seccion-snacks">
           <h2>Snacks</h2>
+          <div class="producto-card" data-nombre="bizcochos proteicos (salados)" data-precio="$3000">
+              <img src="imagenes/bizcocho.jpg" alt="bizcocho.jpg" />
+              <div class="producto-info">
+                <h3>bizcochos proteicos (salados)</h3>
+                <p>
+                  <strong>INGREDIENTES:</strong><br>
+                  harina de garbanzo,levadura,sal,huevo,grasa animal
+                </p>
+                <div class="producto-precio">$1000</div>
+                <div class="producto-controls">
+                  <input type="number" min="1" max="20" value="1" />
+                  <button class="add-carrito">Agregar</button>
+                  </div>
+              </div>
+            </div>
+          </div>
           <div class="productos-grid">
             <div class="producto-card" data-nombre="Budín Orgánico de Avena" data-precio="6500">
               <img src="imagenes/budin.jpg" alt="Budín Orgánico de Avena y Superalimentos" />
@@ -722,14 +749,10 @@
           </div>
           <div class="pago-info"><strong>Método de Pago:</strong> Solo aceptamos <strong>Mercado Pago</strong>.</div>
           <form id="pedido-form">
-            <label for="nombre">Nombre:</label>
-            <input type="text" id="nombre" name="nombre" required />
-            <label for="apellido">Apellido:</label>
-            <input type="text" id="apellido" name="apellido" required />
-            <label for="telefono">Teléfono:</label>
-            <input type="tel" id="telefono" name="telefono" required />
-            <button type="submit">Enviar Pedido</button>
-          </form>
+  <label for="nombre-apellido">Nombre y Apellido:</label>
+  <input type="text" id="nombre-apellido" name="nombre-apellido" required placeholder="Ej: Juan Pérez" />
+  <button type="submit">Enviar Pedido</button>
+</form>
         </section>
       </div>
     </div>
@@ -809,10 +832,9 @@
       e.preventDefault();
       if(carrito.length===0) { alert('Agregá productos al carrito antes de pedir.'); return; }
 
-      // Tomar datos del cliente
-      const nombre = document.getElementById('nombre').value.trim();
-      const apellido = document.getElementById('apellido').value.trim();
-      const telefono = document.getElementById('telefono').value.trim();
+      // Tomar dato del cliente
+  const nombreApellido = document.getElementById('nombre-apellido').value.trim();
+
 
       // Calcular total y armar detalle del pedido
       let total = 0;
