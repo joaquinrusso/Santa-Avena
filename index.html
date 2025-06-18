@@ -828,35 +828,36 @@
     });
 
     document.getElementById('pedido-form').onsubmit = function(e){
-      e.preventDefault();
-      if(carrito.length===0) { alert('Agregá productos al carrito antes de pedir.'); return; }
+  e.preventDefault();
+  if(carrito.length === 0) { alert('Agregá productos al carrito antes de pedir.'); return; }
 
-      // Tomar dato del cliente
+  // Tomar dato del cliente
   const nombreApellido = document.getElementById('nombre-apellido').value.trim();
 
+  // Calcular total y armar detalle del pedido
+  let total = 0;
+  let detalle = carrito.map(item => {
+    total += item.precio * item.cantidad;
+    return `${item.nombre} x${item.cantidad}`;
+  }).join(', ');
 
-      // Calcular total y armar detalle del pedido
-      let total = 0;
-      let detalle = carrito.map(item => {
-        total += item.precio * item.cantidad;
-        return `${item.nombre} x${item.cantidad}`;
-      }).join(', ');
+  // Mensaje para WhatsApp
+  const mensaje = `¡Hola! Quiero hacer un pedido:%0A%0A` +
+    `Nombre y Apellido: ${nombreApellido}%0A` +
+    `Pedido: ${detalle}%0A` +
+    `Total: $${total}`;
 
-      // Mensaje para WhatsApp
-      const mensaje = `¡Hola! Quiero hacer un pedido:%0A%0A` +
-        `Nombre: ${nombre}%0AApellido: ${apellido}%0A` +
-        `Pedido: ${detalle}%0A` +
-        `Total: $${total}`;
+  // Tu número de WhatsApp (con código de país, sin + ni espacios)
+  const numero = '5491156413883';
 
-      // Tu número de WhatsApp (con código de país, sin + ni espacios)
-      const numero = '5491156413883';
+  // Redirigir a WhatsApp
+  window.open(`https://wa.me/${numero}?text=${mensaje}`, '_blank');
 
-      // Redirigir a WhatsApp
-      window.open(`https://wa.me/${numero}?text=${mensaje}`, '_blank');
-
-      // Limpiar carrito y formulario
-      carrito=[]; renderCarrito(); this.reset();
-    };
+  // Limpiar carrito y formulario
+  carrito = [];
+  renderCarrito();
+  this.reset();
+};
 
     // Reseñas con estrellas, nombre obligatorio, comentario opcional, selector de producto obligatorio
     function actualizarProductosSnacks() {
